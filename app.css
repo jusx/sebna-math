@@ -1,0 +1,7 @@
+.nav {display:inline-block;margin-top:20px;font-size:1.8em;}
+.numbers {font-size:5em;line-height:3em;}
+
+
+ul#score-list li {display:inline-block; margin-right:30px;}
+ul#score-list .badge {font-size:1.2em;padding:10px;}
+ul#score-list .caption {color:#999;}
