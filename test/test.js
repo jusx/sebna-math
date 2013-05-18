@@ -1,11 +1,13 @@
 require.config({
-  baseUrl: '.',
+  baseUrl: '../',
   paths: {
     jquery: "http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min",
-    jqueryui: "http//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min",
     underscore: "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min",
     backbone: "http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min",
-    text: "http://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text"
+    text: "http://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text",
+    mocha: "test/lib/mocha/mocha",
+    chai: "test/lib/chai/chai",
+    sinon: "test/lib/sinon/sinon"
   },
   
   shim: {
@@ -21,19 +23,25 @@ require.config({
     backbone: {
       deps: ["underscore", "jquery"],
       exports: "Backbone"
-    },
-    
-    jqueryui: {
-      deps: ["jquery"],
-      exports: "$"
     }
   }
 });
 
 
-require([
-   "app/views/app"
-], function(AppView) {
-  var app = new AppView();
-  
+require(["require", "chai", "mocha", "sinon"], function(require, chai) {
+
+    assert = chai.assert;
+    expect = chai.expect;
+    should = chai.should();
+
+    mocha.setup({
+      ui: "bdd",
+    });
+    var specs = [
+      "test/collections/equation",
+      "test/models/score"
+    ];
+    require(specs, function() {
+       mocha.run()
+    })
 });
