@@ -10,15 +10,13 @@ define ([
         "submit form" : "submit"
       },
       
-      initialize: function() {
-      },
-      
       render: function() {
         this.$el.html(this.template({equation:this.equation.toString()}));
         this.$el.find("input").val("").focus();
         return this;
       },
       
+      // triggered when the user submits an answer. Trigger custom event answer
       submit: function(e) {
         e.preventDefault();
         var value = this.$el.find("input").val();

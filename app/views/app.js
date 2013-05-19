@@ -12,7 +12,6 @@ define ([
       el: "#app",
       template: _.template(tplMain), // cache the template.
       
-      
       events: {
         "click .nav a" : "changeOperator"
       },
