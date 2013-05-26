@@ -1,10 +1,10 @@
 require.config({
   baseUrl: '../',
   paths: {
-    jquery: "http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min",
-    underscore: "http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min",
-    backbone: "http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.0.0/backbone-min",
-    text: "http://cdnjs.cloudflare.com/ajax/libs/require-text/2.0.5/text",
+    jquery: "app/lib/jquery/jquery.min",
+    underscore: "app/lib/underscore/underscore-min",
+    backbone: "app/lib/backbone/backbone",
+    text: "app/lib/text/text",
     mocha: "test/lib/mocha/mocha",
     chai: "test/lib/chai/chai",
     sinon: "test/lib/sinon/sinon"
@@ -39,7 +39,8 @@ require(["require", "chai", "mocha", "sinon"], function(require, chai) {
     });
     var specs = [
       "test/collections/equation",
-      "test/models/score"
+      "test/models/score",
+      "test/views/finish"
     ];
     require(specs, function() {
        mocha.run()

@@ -21,6 +21,15 @@ define ([
       
     },
     
+    isEnded: function() {
+      return (this.get("remaining") == 0);
+    },
+    
+    reset: function() {
+      this.clear().set(this.defaults);
+    }
+    
+    
      
    });
    

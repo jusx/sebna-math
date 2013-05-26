@@ -6,8 +6,9 @@ define ([
   "app/models/equation",
   "app/views/score",
   "app/views/message",
-  "app/views/equation"
-], function(Backbone, tplMain, Score, EquationList, Equation, ScoreView, MessageView, EquationView) {
+  "app/views/equation",
+  "app/views/finish"
+], function(Backbone, tplMain, Score, EquationList, Equation, ScoreView, MessageView, EquationView, FinishView) {
    var AppView = Backbone.View.extend({
       el: "#app",
       template: _.template(tplMain), // cache the template.
@@ -22,15 +23,22 @@ define ([
         this.scoreView = new ScoreView({model:this.equations.score});
         this.messageView = new MessageView();
         this.equationView = new EquationView();
+        this.finishView = new FinishView();
         this.renderEquation();
         
         this.scoreView.listenTo(this.equations, "add", this.scoreView.render);
         this.listenTo(this.messageView, "next", this.renderEquation);
+        this.listenTo(this.finishView, "next", this.startOver);
         
         var score = this.equations.score;
-        this.messageView.listenTo(this.equations, "add", function() {
-          this.data.title = score.get("lastScore").charAt(0).toUpperCase() + score.get("lastScore").slice(1);
-          this.render();
+        this.listenTo(this.equations, "add", function() {
+          if (this.equations.score.isEnded()) {
+            this.finishView.model = this.equations.score.toJSON();
+            this.finishView.render();
+          } else {
+            this.messageView.data.title = score.get("lastScore").charAt(0).toUpperCase() + score.get("lastScore").slice(1);
+            this.messageView.render();
+          }
         });
         
         this.listenTo(this.equationView, "answer", function(equation, answer) {
@@ -42,6 +50,12 @@ define ([
           }
         });
         
+      },
+      
+      startOver: function() {
+        this.equations.reset();
+        this.renderEquation();
+        this.scoreView.render();
       },
       
       renderEquation: function() {

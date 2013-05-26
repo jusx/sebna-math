@@ -19,7 +19,7 @@ define ([
         }
         return this;
       },
-      
+
       // helper method to animate scoring based on the last scoring result correct/incorrect.
       shake: function(last) {
         var elm = this.$el.find(".js-" + last)

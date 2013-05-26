@@ -1,14 +1,14 @@
 .nav {display:inline-block;margin-top:20px;font-size:1.8em;}
 .numbers {font-size:5em;line-height:2em;}
 
+.finish-content, .message-content { border:1px solid #eee;border-radius:5px; padding:21px; }
+.message div[class *= "span"] {display:inline-block;float:none; padding:7px;}
 
 #score-list li {display:inline-block; margin-right:30px;}
 #score-list .badge {font-size:1.2em;padding:10px;}
 #score-list .caption {color:#999;}
 
 
-#message div[class *= "span"] {display:inline-block;float:none; padding:7px;}
-#message .message-content { border:1px solid #eee;border-radius:5px; padding:21px; }
 #message button {margin-top:14px; margin-bottom:7px;}
 #message h1 { font-size: 5em; margin-bottom:21px; color:#468847;}
 #message h1.correct {  color:#468847;}

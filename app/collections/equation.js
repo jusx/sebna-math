@@ -5,8 +5,12 @@ define ([
 ], function(Backbone, Equation, Score) {
    var EquationList = Backbone.Collection.extend({
      model: Equation,
-     score: new Score(),
      operator: "+",
+     
+     initialize: function() {
+       this.score = new Score();
+       this.score.listenTo(this, "reset", this.score.reset);
+     },
      
      // create an equation not already in the collection
      createEquation: function() {

@@ -9,11 +9,27 @@
           eqs.score.get("remaining").should.equal(30);
           eqs.score.get("incorrect").should.equal(0);
           eqs.score.get("correct").should.equal(0);
+          
+          eqs.correct(eqs.createEquation());
+          eqs.score.get("correct").should.equal(1);
+        });
+        
+      });
+      
+      describe("#reset", function() {
+        it("Should reset score", function() {
+          var eqs = new EquationList();
+          eqs.correct(eqs.createEquation());
+          eqs.score.get("correct").should.equal(1);
+          
+          eqs.reset();
+          eqs.score.get("correct").should.equal(0);
+          eqs.score.get("remaining").should.equal(30);
         });
       });
       
       describe("#createEquation", function() {
-        var eqs;
+        var eqs = null;
         beforeEach(function(){
           eqs = new EquationList();
         });
@@ -27,7 +43,6 @@
         });
         
         it("Should update score appropriately", function() {
-          
           var eq = eqs.createEquation();
           eqs.correct(eq);
           eqs.where(eq.toJSON()).length.should.equal(1);
